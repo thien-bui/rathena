@@ -3308,6 +3308,11 @@ bool itemdb_ishatched_egg(struct item* item) {
 * @param nameid ID of item
 */
 char itemdb_isidentified(t_itemid nameid) {
+	// Check battle configuration setting for automatic identification
+	if (battle_config.items_drop_identified) {
+		return 1; // Always identified when setting is enabled
+	}
+
 	int32 type=itemdb_type(nameid);
 	switch (type) {
 		case IT_WEAPON:

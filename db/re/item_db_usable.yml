@@ -101,7 +101,7 @@ Body:
     Name: Red Potion
     Type: Healing
     Buy: 10
-    Weight: 70
+    Weight: 10
     Script: |
       itemheal rand(45,65),0;
   - Id: 502
@@ -109,7 +109,7 @@ Body:
     Name: Orange Potion
     Type: Healing
     Buy: 50
-    Weight: 100
+    Weight: 10
     Script: |
       itemheal rand(105,145),0;
   - Id: 503
@@ -117,7 +117,7 @@ Body:
     Name: Yellow Potion
     Type: Healing
     Buy: 180
-    Weight: 130
+    Weight: 10
     Script: |
       itemheal rand(175,235),0;
   - Id: 504
@@ -125,7 +125,7 @@ Body:
     Name: White Potion
     Type: Healing
     Buy: 1200
-    Weight: 150
+    Weight: 10
     Script: |
       itemheal rand(325,405),0;
   - Id: 505
@@ -133,9 +133,9 @@ Body:
     Name: Blue Potion
     Type: Healing
     Buy: 5000
-    Weight: 150
+    Weight: 10
     Script: |
-      itemheal 0,rand(40,60);
+      itemheal 0,rand(100,200);
   - Id: 506
     AegisName: Green_Potion
     Name: Green Potion
@@ -155,7 +155,7 @@ Body:
     Name: Red Herb
     Type: Healing
     Buy: 18
-    Weight: 30
+    Weight: 10
     Flags:
       BuyingStore: true
     Script: |
@@ -165,7 +165,7 @@ Body:
     Name: Yellow Herb
     Type: Healing
     Buy: 40
-    Weight: 50
+    Weight: 10
     Flags:
       BuyingStore: true
     Script: |
@@ -175,7 +175,7 @@ Body:
     Name: White Herb
     Type: Healing
     Buy: 120
-    Weight: 70
+    Weight: 10
     Flags:
       BuyingStore: true
     Script: |
@@ -185,7 +185,7 @@ Body:
     Name: Blue Herb
     Type: Healing
     Buy: 60
-    Weight: 70
+    Weight: 10
     Flags:
       BuyingStore: true
     Script: |
@@ -195,7 +195,7 @@ Body:
     Name: Green Herb
     Type: Healing
     Buy: 10
-    Weight: 30
+    Weight: 10
     Flags:
       BuyingStore: true
     Script: |
@@ -265,7 +265,7 @@ Body:
     Name: Honey
     Type: Healing
     Buy: 500
-    Weight: 100
+    Weight: 10
     Flags:
       BuyingStore: true
     Script: |
@@ -305,7 +305,7 @@ Body:
     Name: Mastela Fruit
     Type: Healing
     Buy: 8500
-    Weight: 30
+    Weight: 10
     Flags:
       BuyingStore: true
     Script: |
@@ -518,7 +518,7 @@ Body:
     Name: Condensed Red Potion
     Type: Healing
     Buy: 150
-    Weight: 20
+    Weight: 10
     Script: |
       itemheal rand(45,65),0;
   - Id: 546
@@ -526,7 +526,7 @@ Body:
     Name: Condensed Yellow Potion
     Type: Healing
     Buy: 600
-    Weight: 30
+    Weight: 10
     Script: |
       itemheal rand(175,235),0;
   - Id: 547
@@ -534,7 +534,7 @@ Body:
     Name: Condensed White Potion
     Type: Healing
     Buy: 1650
-    Weight: 50
+    Weight: 10
     Trade:
       NoSell: true
     Script: |
@@ -3585,7 +3585,7 @@ Body:
     AegisName: Yellow_Potion_B
     Name: "[Not For Sale] Yellow Potion"
     Type: Healing
-    Weight: 130
+    Weight: 20
     Trade:
       NoDrop: true
       NoTrade: true
@@ -3631,7 +3631,7 @@ Body:
     AegisName: Orange_Potion_B
     Name: "[Not For Sale] Orange Potion"
     Type: Healing
-    Weight: 100
+    Weight: 20
     Trade:
       NoDrop: true
       NoTrade: true
@@ -3646,7 +3646,7 @@ Body:
     AegisName: Red_Potion_B
     Name: "[Not For Sale] Red Potion"
     Type: Healing
-    Weight: 70
+    Weight: 20
     Trade:
       NoDrop: true
       NoTrade: true
@@ -3680,7 +3680,7 @@ Body:
     AegisName: Blue_Potion_B
     Name: "[Not For Sale] Blue Potion"
     Type: Healing
-    Weight: 150
+    Weight: 20
     Trade:
       NoDrop: true
       NoTrade: true
@@ -4624,7 +4624,7 @@ Body:
     AegisName: Iron_Arrow_Container
     Name: Iron Arrow Quiver
     Type: Usable
-    Buy: 2
+    Buy: 1500
     Sell: 0
     Weight: 250
     Flags:
@@ -58277,7 +58277,7 @@ Body:
     AegisName: Bullet_Case_AP
     Name: Armor-Piercing Cartridge
     Type: Usable
-    Buy: 10
+    Buy: 2500
     Weight: 250
     Script: |
       getitem 13215,500;
@@ -67964,6 +67964,7 @@ Body:
     AegisName: Kunai_Scroll_Explosive
     Name: Explosive Kunai Scroll
     Type: Usable
+    Buy: 50000
     Weight: 250
     Flags:
       Container: true
@@ -68000,6 +68001,7 @@ Body:
     AegisName: Bullet_Case_Full
     Name: Full Metal Jacket Case
     Type: Usable
+    Buy: 7500
     Weight: 250
     Flags:
       Container: true

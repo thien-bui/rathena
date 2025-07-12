@@ -11,3 +11,5 @@
  *	 { "name", &battle_config.<variable name>, <default value>, <minimum value>, <maximum value> },
  **/
 
+//{ "items_drop_identified", &battle_config.items_drop_identified, 0, 0, 1 },
+

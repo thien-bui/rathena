@@ -18,7 +18,7 @@
 //===== Al De Baran Warps =====================================
 aldebaran,118,63,0	warp	ald01	1,1,aldeba_in,211,117
 aldebaran,139,34,0	warp	ald001	3,2,mjolnir_12,199,375
-aldebaran,197,70,0	warp	ald02	1,1,aldeba_in,94,41
+aldebaran,197,73,0	warp	ald02	1,1,aldeba_in,94,41
 aldebaran,233,105,0	warp	ald04	1,1,aldeba_in,157,190
 aldebaran,51,218,0	warp	ald05	1,1,aldeba_in,24,227
 aldebaran,61,229,0	warp	ald06	1,1,aldeba_in,148,227

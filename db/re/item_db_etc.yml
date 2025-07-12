@@ -560,7 +560,7 @@ Body:
     Name: Rough Oridecon
     Type: Etc
     Buy: 550
-    Weight: 200
+    Weight: 10
     Flags:
       BuyingStore: true
       DropEffect: CLIENT
@@ -569,7 +569,7 @@ Body:
     Name: Rough Elunium
     Type: Etc
     Buy: 650
-    Weight: 200
+    Weight: 10
     Flags:
       BuyingStore: true
       DropEffect: CLIENT
@@ -1256,7 +1256,7 @@ Body:
     Name: Oridecon
     Type: Etc
     Buy: 1100
-    Weight: 200
+    Weight: 10
     Flags:
       BuyingStore: true
       DropEffect: CLIENT
@@ -1265,7 +1265,7 @@ Body:
     Name: Elunium
     Type: Etc
     Buy: 1100
-    Weight: 200
+    Weight: 10
     Flags:
       BuyingStore: true
       DropEffect: CLIENT

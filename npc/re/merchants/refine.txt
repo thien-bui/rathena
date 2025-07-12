@@ -37,6 +37,7 @@ prt_in,90,72,5	script	Vestri#prt	4_M_DWARF,{
 
 morocc_in,64,41,5	duplicate(Vestri#prt)	Vestri#moc	4_M_DWARF
 payon_in01,18,132,3	duplicate(Vestri#prt)	Vestri#pay	4_M_DWARF
+dewata,208,184,3	duplicate(Vestri#prt)	Vestri#dewata	4_M_DWARF
 
 //============================================================
 // +11 and above Refiner Function
