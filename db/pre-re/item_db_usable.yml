@@ -3974,8 +3974,8 @@ Body:
     AegisName: Bullet_Case_Blood
     Name: Blood Cartridge
     Type: Usable
-    Buy: 2
-    Weight: 250
+    Buy: 3000
+    Weight: 100
     Flags:
       BuyingStore: true
     Script: |
@@ -3984,8 +3984,8 @@ Body:
     AegisName: Bullet_Case_Silver
     Name: Silver Cartridge
     Type: Usable
-    Buy: 2
-    Weight: 250
+    Buy: 1500
+    Weight: 100
     Flags:
       BuyingStore: true
     Script: |
