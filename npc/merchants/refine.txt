@@ -1123,46 +1123,59 @@ function	script	orimain	{
 	}
 	.@npc_name$ = getarg(0);
 	mes "["+ .@npc_name$ +"]";
-	mes "I can purify your";
-	mes "Rough Oridecons or";
-	mes "Rough Eluniums. I'll need";
-	mes "5 Rough Stones to make";
-	mes "1 pure one for you.";
+	mes "I can purify all your";
+	mes "Rough Oridecons and";
+	mes "Rough Eluniums at once!";
+	mes "I'll need 5 Rough Stones";
+	mes "to make 1 pure one for you.";
 	next;
-	switch(select("Make Oridecon:Make Elunium:Ask about Enchanted Stones")) {
+	
+	.@rough_oridecon = countitem(756);
+	.@rough_elunium = countitem(757);
+	.@oridecon_convert = .@rough_oridecon / 5;
+	.@elunium_convert = .@rough_elunium / 5;
+	
+	if (.@oridecon_convert == 0 && .@elunium_convert == 0) {
+		mes "["+ .@npc_name$ +"]";
+		mes "You don't have enough rough materials. I need at least 5 of each rough stone to make a pure one.";
+		close;
+	}
+	
+	switch(select("Convert All Materials:Ask about Enchanted Stones:Cancel")) {
 	case 1:
-		if (countitem(756) > 4) {
-			delitem 756,5;  //Oridecon_Stone
-			getitem 984,1; // Oridecon
+		mes "["+ .@npc_name$ +"]";
+		mes "I can convert:";
+		if (.@oridecon_convert > 0) {
+			mes "^0000FF" + (.@oridecon_convert * 5) + " Rough Oridecon^000000 into ^00FF00" + .@oridecon_convert + " Oridecon^000000";
+		}
+		if (.@elunium_convert > 0) {
+			mes "^0000FF" + (.@elunium_convert * 5) + " Rough Elunium^000000 into ^00FF00" + .@elunium_convert + " Elunium^000000";
+		}
+		mes "Shall I convert all of them?";
+		next;
+		
+		switch(select("Yes, convert all:No, cancel")) {
+		case 1:
+			if (.@oridecon_convert > 0) {
+				delitem 756, (.@oridecon_convert * 5);  //Oridecon_Stone
+				getitem 984, .@oridecon_convert; // Oridecon
+			}
+			if (.@elunium_convert > 0) {
+				delitem 757, (.@elunium_convert * 5);  //Elunium_Stone
+				getitem 985, .@elunium_convert; // Elunium
+			}
 			mes "["+ .@npc_name$ +"]";
-			mes "Here's your Oridecon.";
+			mes "Here are your purified stones!";
 			mes "You're welcome to come";
 			mes "back whenever you want.";
 			close;
-		}
-		else {
+		case 2:
 			mes "["+ .@npc_name$ +"]";
-			mes "You're kidding me, right?";
-			mes "I just told you that I need 5 Rough Oridecons to make a pure Oridecon.";
+			mes "Come back anytime you";
+			mes "want to purify your stones.";
 			close;
 		}
 	case 2:
-		if (countitem(757) > 4) {
-			delitem 757,5;  //Elunium_Stone
-			getitem 985,1; // Elunium
-			mes "["+ .@npc_name$ +"]";
-			mes "Here's your Elunium.";
-			mes "You're welcome to come";
-			mes "back whenever you want.";
-			close;
-		}
-		else {
-			mes "["+ .@npc_name$ +"]";
-			mes "You're kidding me, right?";
-			mes "I just told you that I need 5 Rough Eluniums to make a pure Elunium.";
-			close;
-		}
-	case 3:
 		mes "["+ .@npc_name$ +"]";
 		mes "Enchanted Stones...?";
 		mes "I've been a stonesmith for 20 years, so I've heard a lot about them. Supposedly, there are";
@@ -1176,6 +1189,11 @@ function	script	orimain	{
 		next;
 		mes "["+ .@npc_name$ +"]";
 		mes "Needless to say, you need to have some smithing skill to produce this kind of elemental weapon.";
+		close;
+	case 3:
+		mes "["+ .@npc_name$ +"]";
+		mes "Come back anytime you";
+		mes "want to purify your stones.";
 		close;
 	}
 }

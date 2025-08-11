@@ -110,7 +110,7 @@ Body:
     Name: Yellow Potion
     Type: Healing
     Buy: 550
-    Weight: 130
+    Weight: 10
     Script: |
       itemheal rand(175,235),0;
   - Id: 504
@@ -397,7 +397,7 @@ Body:
     Name: Grape Juice
     Type: Healing
     Buy: 250
-    Weight: 40
+    Weight: 1
     Flags:
       BuyingStore: true
     Script: |
