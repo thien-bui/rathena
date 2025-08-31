@@ -532,7 +532,7 @@ prt_in,63,60,0	script	Hollgrehenn	4_M_03,{
 		refineui();
 		end;
 	}else{
-		callfunc "refinemain","Hollgrehenn",0;
+		callfunc "refinemain","Hollgrehenn",1;
 		end;
 	}
 }
@@ -621,6 +621,20 @@ lhz_in02,282,20,7	script	Fulerr	4_M_LGTMAN,{
 	}
 }
 
+gonryun,152,116,4	script	Kunlun Blacksmith	4_M_03,{
+	if( getbattleflag( "feature.refineui" ) ){
+		mes "[Kunlun Blacksmith]";
+		mes "I'm a skilled blacksmith who can refine weapons and equipment.";
+		mes "Do you have any items that you'd like to refine?";
+		close2;
+		refineui();
+		end;
+	}else{
+		callfunc "refinemain","Kunlun Blacksmith",1;
+		end;
+	}
+}
+
 //============================================================
 //= Main Refiner Function
 //============================================================
@@ -633,6 +647,7 @@ function	script	refinemain	{
 	disable_items;
 	.@npc_name$ = getarg(0);
 	.@features = getarg(1);
+	.@MAX_REFINE = 25; // Maximum refine level (20 for Renewal, 25 for Pre-Renewal)
 	mes "["+ .@npc_name$ +"]";
 	mes "I'm the Armsmith.";
 	mes "I can refine all kinds of weapons, armor and equipment, so let me";
@@ -669,13 +684,78 @@ function	script	refinemain	{
 		mes "refine this item at all...";
 		close;
 	}
-	//Check to see if the items is already +10
-	if(getequiprefinerycnt(.@part) >= 10) {
+	//Check to see if the items is already at maximum refine level
+	if(getequiprefinerycnt(.@part) >= .@MAX_REFINE) {
 		mes "["+ .@npc_name$ +"]";
 		mes "I can't refine this";
 		mes "any more. This is as";
 		mes "refined as it gets!";
 		close;
+	}
+	
+	//Check if item has refinement levels to reset
+	.@current_refine = getequiprefinerycnt(.@part);
+	if(.@current_refine > 0) {
+		mes "["+ .@npc_name$ +"]";
+		mes "This item is currently +" + .@current_refine + ".";
+		mes "What would you like to do?";
+		next;
+		switch(select("Refine this item:Reset refinement to +0:Cancel")) {
+		case 1:
+			break; // Continue with normal refinement
+		case 2:
+			mes "["+ .@npc_name$ +"]";
+			mes "Are you sure you want to reset this item's refinement back to +0?";
+			mes "I'll refund you the materials used for refinement.";
+			next;
+			if(select("Yes, reset it:No, keep current refinement") == 2) {
+				mes "["+ .@npc_name$ +"]";
+				mes "Alright, I'll leave it as is.";
+				close;
+			}
+			
+			// Calculate material refund
+			.@refineitemid = getequipid(.@part);
+			.@itemtype = getiteminfo(.@refineitemid, ITEMINFO_TYPE);
+			
+			if(.@itemtype == IT_ARMOR) {
+				.@refund_material = 985; // Elunium
+			} else if(.@itemtype == IT_WEAPON) {
+				.@equip_lv = getequipweaponlv(.@part);
+				switch(.@equip_lv) {
+					case 1: .@refund_material = 1010; break; // Phracon
+					case 2: .@refund_material = 1011; break; // Emveretarcon
+					case 3: .@refund_material = 984; break;  // Oridecon
+					case 4: .@refund_material = 984; break;  // Oridecon
+					default: .@refund_material = 1010; break; // Default to Phracon
+				}
+			} else {
+				.@refund_material = 985; // Default to Elunium for other equipment
+			}
+			
+			.@refund_amount = .@current_refine;
+			
+			// Check inventory space
+			if(checkweight(.@refund_material, .@refund_amount) == 0) {
+				mes "["+ .@npc_name$ +"]";
+				mes "You don't have enough space in your inventory to receive the refunded materials.";
+				mes "Please make some room and come back.";
+				close;
+			}
+			
+			// Reset refinement and give materials
+			downrefitem .@part, .@current_refine;
+			getitem .@refund_material, .@refund_amount;
+			
+			mes "["+ .@npc_name$ +"]";
+			mes "Done! I've reset your " + getequipname(.@part) + " to +0 and";
+			mes "refunded you " + .@refund_amount + " " + getitemname(.@refund_material) + ".";
+			close;
+		case 3:
+			mes "["+ .@npc_name$ +"]";
+			mes "Come back anytime if you change your mind.";
+			close;
+		}
 	}
 	.@refineitemid = getequipid(.@part); // save id of the item
 	.@refinerycnt = getequiprefinerycnt(.@part); //save refinery count
@@ -821,24 +901,23 @@ function	script	refinemain	{
 		}
 
 		if(getequippercentrefinery(.@part) <= rand(100)) {
-			failedrefitem .@part;
 			mes "["+ .@npc_name$ +"]";
 			emotion (!rand(5))?ET_MONEY:ET_HUK;
 			.@lose = rand(1,3);
 			if (.@lose == 1) {
 				mes "OH! MY GOD!";
 				mes "Damn it! Not again!";
-				mes "I'm terribly sorry, but you know practice does make perfect.";
-				mes "Um, right? Heh heh...";
+				mes "I'm terribly sorry, but the refinement failed.";
+				mes "But don't worry, your item is still safe!";
 			} else if(.@lose == 2) {
 				mes "Nooooooo!";
-				mes "It broke!";
-				mes "I-I'm sorry!";
+				mes "The refinement failed!";
+				mes "I-I'm sorry, but your item is undamaged!";
 			} else {
 				mes "Crap!";
-				mes "It couldn't take";
-				mes "much more tempering!";
-				mes "Sorry about this...";
+				mes "The tempering didn't work";
+				mes "this time, but your item";
+				mes "is still intact!";
 			}
 			close;
 		}
@@ -870,9 +949,9 @@ function	script	refinemain	{
 // New Refining Functions ========================
 	if (.@refinerycnt < .@safe) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I can refine this to the safe limit or a desired number of times. It's your choice.";
+		mes "I can refine this to the safe limit or a desired refine level. It's your choice.";
 		next;
-		.@menu2 = select("To the safe limit, please.","I'll decide how many times.","I've changed my mind...");
+		.@menu2 = select("To the safe limit, please.","I'll decide the target level.","I've changed my mind...");
 	} else
 		.@menu2 = 2;
 	switch(.@menu2){
@@ -882,19 +961,19 @@ function	script	refinemain	{
 	case 2:
 		next;
 		mes "["+ .@npc_name$ +"]";
-		mes "How many times would you like me to refine your item?";
+		mes "What refine level would you like to reach? (Current: +" + .@refinerycnt + ")";
 		next;
-		input .@refinecnt;
-		.@refinecheck = .@refinecnt + .@refinerycnt;
-		if (.@refinecnt < 1 || .@refinecheck > 10) {
+		input .@target_level;
+		if (.@target_level < .@refinerycnt + 1 || .@target_level > .@MAX_REFINE) {
 			mes "["+ .@npc_name$ +"]";
-			mes "I can't refine this item that many times.";
+			mes "I can't refine to that level. Please choose between +" + (.@refinerycnt + 1) + " and +" + .@MAX_REFINE + ".";
 			close;
 		}
-		if(.@refinecheck > .@safe) {
-			.@refinecheck = .@refinecheck - .@safe;
+		.@refinecnt = .@target_level - .@refinerycnt;
+		if(.@target_level > .@safe) {
+			.@unsafe_levels = .@target_level - .@safe;
 			mes "["+ .@npc_name$ +"]";
-			mes "This will try to refine the equipment " + .@refinecheck + " times past the safe limit. Your equipment may be destroyed... is that ok?";
+			mes "This will attempt to refine " + .@unsafe_levels + " levels past the safe limit. Your equipment may be destroyed... is that ok?";
 			next;
 			if(select("Yes...","No...") == 2){
 				mes "["+ .@npc_name$ +"]";
@@ -909,23 +988,29 @@ function	script	refinemain	{
 		mes "You said so... So be it.";
 		close;
 	}
-	.@fullprice = .@price * .@refinecnt;
+	// Calculate maximum possible cost (in case of failures)
+	.@max_attempts = (.@target_level - .@refinerycnt) * 3; // Assume up to 3x attempts needed
+	.@max_price = .@price * .@max_attempts;
 	mes "["+ .@npc_name$ +"]";
-	mes "That will cost you " + .@refinecnt + " " + getitemname(.@material) + " and " + .@fullprice + " Zeny. Is that ok?";
+	mes "I'll try to refine from +" + .@refinerycnt + " to +" + .@target_level + ".";
+	mes "I'll need up to " + .@max_attempts + " " + getitemname(.@material) + " and " + .@max_price + " Zeny.";
+	mes "I'll charge " + .@price + " Zeny and 1 " + getitemname(.@material) + " for each attempt. Is that ok?";
 	next;
 	if(select("Yes","No...") == 2){
 		mes "["+ .@npc_name$ +"]";
 		mes "You said so... So be it.";
 		close;
 	}
-	if(countitem(.@material) < .@refinecnt || Zeny < .@fullprice) {
+	if(countitem(.@material) < .@max_attempts || Zeny < .@max_price) {
 		mes "["+ .@npc_name$ +"]";
-		mes "Is that all you got? Unfortunately I can't work for you at a lower price. Try putting yourself in my shoes.";
+		mes "You don't have enough materials or Zeny. I need up to " + .@max_attempts + " " + getitemname(.@material) + " and " + .@max_price + " Zeny.";
 		close;
 	}
-	Zeny = Zeny - .@fullprice;
-	delitem .@material,.@refinecnt;
-	while(.@refinecnt){
+	.@original_level = .@refinerycnt;
+	.@success_count = 0;
+	.@fail_count = 0;
+	.@attempts = 0;
+	while(getequiprefinerycnt(.@part) < .@target_level && countitem(.@material) > 0 && Zeny >= .@price){
 		if (getequipisequiped(.@part) == 0) {
 			mes "["+ .@npc_name$ +"]";
 			mes "Look here... you don't have any items on...";
@@ -940,28 +1025,43 @@ function	script	refinemain	{
 			mes "Get out before I stun you with my Hammer!!";
 			close;
 		} 
-		mes "Clang, clang!!!";
+		.@attempts = .@attempts + 1;
+		Zeny = Zeny - .@price;
+		delitem .@material, 1;
+		
 		if(.@menu2 == 2 && getequippercentrefinery(.@part) <= rand(100)) {
-			failedrefitem .@part;
 			emotion ET_HUK;
-			mes "["+ .@npc_name$ +"]";
-			mes "WAHHHH!!! I'm so sorry... I warned you this could happen...";
-			.@refinecnt = .@refinecnt - 1;
-			if(.@refinecnt == 0) close;
-			mes "Here's the unused Zeny and materials back...";
-			getitem .@material,.@refinecnt;
-			.@fullprice = .@refinecnt * .@price;
-			Zeny = Zeny + .@fullprice;
-			close;
+			.@fail_count = .@fail_count + 1;
+		} else {
+			successrefitem .@part;
+			emotion ET_BEST;
+			.@success_count = .@success_count + 1;
+			.@refinerycnt = getequiprefinerycnt(.@part);
 		}
-		successrefitem .@part;
-		emotion ET_BEST;
-		.@refinecnt = .@refinecnt - 1;
-		.@refinerycnt = getequiprefinerycnt(.@part);
-		next;
+		
+		sleep2 1000;
 	}
+	.@final_level = getequiprefinerycnt(.@part);
 	mes "["+ .@npc_name$ +"]";
-	mes "All finished... Come again soon.";
+	
+	if(.@final_level >= .@target_level) {
+		mes "Success! I reached your target of +" + .@target_level + "!";
+	} else if(countitem(.@material) == 0) {
+		mes "I ran out of materials. Reached +" + .@final_level + " (target was +" + .@target_level + ").";
+	} else if(Zeny < .@price) {
+		mes "You ran out of Zeny. Reached +" + .@final_level + " (target was +" + .@target_level + ").";
+	} else {
+		mes "Refinement complete. Reached +" + .@final_level + " (target was +" + .@target_level + ").";
+	}
+	
+	mes "Total attempts: ^0000FF" + .@attempts + "^000000";
+	if(.@success_count > 0) {
+		mes "Successful refinements: ^00FF00" + .@success_count + "^000000";
+	}
+	if(.@fail_count > 0) {
+		mes "Failed attempts: ^FF0000" + .@fail_count + "^000000";
+	}
+	mes "Come again soon.";
 	close;
 }
 
@@ -1266,6 +1366,11 @@ aru_gld,189,336,4	script	Repairman#aru_gld	86,{
 }
 
 sch_gld,340,80,7	script	Repairman#sch_gld	86,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+
+gonryun,152,121,4	script	Repairman#kunlun	86,{
 	callfunc "repairmain","Repairman";
 	end;
 }

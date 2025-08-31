@@ -51,7 +51,7 @@ Body:
       - Level: 1
         RefineLevels:
           - Level: 1
-            Bonus: 89
+            Bonus: 107
             Chances:
               - Type: Normal
                 Rate: 10000
@@ -62,7 +62,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 2
-            Bonus: 177
+            Bonus: 213
             Chances:
               - Type: Normal
                 Rate: 10000
@@ -73,7 +73,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 3
-            Bonus: 266
+            Bonus: 321
             Chances:
               - Type: Normal
                 Rate: 10000
@@ -84,7 +84,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 4
-            Bonus: 354
+            Bonus: 428
             Chances:
               - Type: Normal
                 Rate: 10000
@@ -95,7 +95,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 5
-            Bonus: 443
+            Bonus: 536
             Chances:
               - Type: Normal
                 Rate: 10000
@@ -106,7 +106,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 6
-            Bonus: 531
+            Bonus: 644
             Chances:
               - Type: Normal
                 Rate: 8000
@@ -117,7 +117,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 7
-            Bonus: 620
+            Bonus: 753
             Chances:
               - Type: Normal
                 Rate: 8000
@@ -128,7 +128,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 8
-            Bonus: 708
+            Bonus: 861
             BlacksmithBlessingAmount: 1
             Chances:
               - Type: Normal
@@ -140,7 +140,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 9
-            Bonus: 798
+            Bonus: 972
             BlacksmithBlessingAmount: 2
             Chances:
               - Type: Normal
@@ -152,7 +152,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 10
-            Bonus: 886
+            Bonus: 1081
             BlacksmithBlessingAmount: 4
             Chances:
               - Type: Normal
@@ -164,7 +164,7 @@ Body:
                 Price: 2000
                 Material: Enriched_Elunium
           - Level: 11
-            Bonus: 992
+            Bonus: 1212
             BlacksmithBlessingAmount: 5
             Chances:
               - Type: Normal
@@ -176,7 +176,7 @@ Body:
                 Price: 5000
                 Material: Enriched_Elunium
           - Level: 12
-            Bonus: 1082
+            Bonus: 1324
             BlacksmithBlessingAmount: 6
             Chances:
               - Type: Normal
@@ -188,7 +188,7 @@ Body:
                 Price: 7500
                 Material: Enriched_Elunium
           - Level: 13
-            Bonus: 1174
+            Bonus: 1439
             BlacksmithBlessingAmount: 7
             Chances:
               - Type: Normal
@@ -200,7 +200,7 @@ Body:
                 Price: 10000
                 Material: Enriched_Elunium
           - Level: 14
-            Bonus: 1266
+            Bonus: 1554
             BlacksmithBlessingAmount: 8
             Chances:
               - Type: Normal
@@ -212,7 +212,7 @@ Body:
                 Price: 15000
                 Material: Enriched_Elunium
           - Level: 15
-            Bonus: 1389
+            Bonus: 1709
             BlacksmithBlessingAmount: 10
             Chances:
               - Type: Normal
@@ -224,7 +224,7 @@ Body:
                 Price: 20000
                 Material: Enriched_Elunium
           - Level: 16
-            Bonus: 1481
+            Bonus: 1827
             BlacksmithBlessingAmount: 12
             Chances:
               - Type: Normal
@@ -236,7 +236,7 @@ Body:
                 Price: 25000
                 Material: Enriched_Elunium
           - Level: 17
-            Bonus: 1574
+            Bonus: 1946
             BlacksmithBlessingAmount: 14
             Chances:
               - Type: Normal
@@ -248,7 +248,7 @@ Body:
                 Price: 30000
                 Material: Enriched_Elunium
           - Level: 18
-            Bonus: 1667
+            Bonus: 2063
             BlacksmithBlessingAmount: 16
             Chances:
               - Type: Normal
@@ -260,7 +260,7 @@ Body:
                 Price: 40000
                 Material: Enriched_Elunium
           - Level: 19
-            Bonus: 1761
+            Bonus: 2183
             BlacksmithBlessingAmount: 18
             Chances:
               - Type: Normal
@@ -272,7 +272,7 @@ Body:
                 Price: 50000
                 Material: Enriched_Elunium
           - Level: 20
-            Bonus: 1852
+            Bonus: 2297
             BlacksmithBlessingAmount: 20
             Chances:
               - Type: Normal
@@ -284,7 +284,7 @@ Body:
                 Price: 75000
                 Material: Enriched_Elunium
           - Level: 21
-            Bonus: 2029
+            Bonus: 2520
             BlacksmithBlessingAmount: 25
             Chances:
               - Type: Normal
@@ -296,7 +296,7 @@ Body:
                 Price: 100000
                 Material: Enriched_Elunium
           - Level: 22
-            Bonus: 2125
+            Bonus: 2641
             BlacksmithBlessingAmount: 30
             Chances:
               - Type: Normal
@@ -308,7 +308,7 @@ Body:
                 Price: 125000
                 Material: Enriched_Elunium
           - Level: 23
-            Bonus: 2222
+            Bonus: 2766
             BlacksmithBlessingAmount: 35
             Chances:
               - Type: Normal
@@ -320,7 +320,7 @@ Body:
                 Price: 150000
                 Material: Enriched_Elunium
           - Level: 24
-            Bonus: 2319
+            Bonus: 2888
             BlacksmithBlessingAmount: 40
             Chances:
               - Type: Normal
@@ -332,7 +332,7 @@ Body:
                 Price: 200000
                 Material: Enriched_Elunium
           - Level: 25
-            Bonus: 2516
+            Bonus: 3145
             BlacksmithBlessingAmount: 50
             Chances:
               - Type: Normal
